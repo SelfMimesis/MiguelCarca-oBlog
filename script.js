@@ -118,6 +118,57 @@
     }
   }
 
+  function renderVisitCounter(counter, value) {
+    var digits = String(value);
+    var html = "";
+
+    while (digits.length < 6) {
+      digits = "0" + digits;
+    }
+
+    for (var i = 0; i < digits.length; i += 1) {
+      html += "<span>" + digits.charAt(i) + "</span>";
+    }
+
+    counter.innerHTML = html;
+  }
+
+  function setupVisitCounter() {
+    var counter = document.querySelector("[data-visit-counter]");
+    var key = "blog-fake-visits-2009";
+    var value;
+
+    if (!counter) {
+      return;
+    }
+
+    try {
+      value = parseInt(localStorage.getItem(key) || "19842", 10);
+    } catch (error) {
+      value = 19842;
+    }
+
+    if (!value || value < 19842) {
+      value = 19842;
+    }
+
+    value += 1;
+    try {
+      localStorage.setItem(key, String(value));
+    } catch (error) {
+    }
+    renderVisitCounter(counter, value);
+
+    setInterval(function () {
+      value += 1;
+      try {
+        localStorage.setItem(key, String(value));
+      } catch (error) {
+      }
+      renderVisitCounter(counter, value);
+    }, 15000);
+  }
+
   for (var i = 0; i < resultInputs.length; i += 1) {
     resultInputs[i].value = query;
   }
@@ -127,4 +178,5 @@
   }
 
   setupBlogComments();
+  setupVisitCounter();
 }());

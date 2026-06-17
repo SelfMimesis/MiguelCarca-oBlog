@@ -1,11 +1,15 @@
-# MiguelCarcañoBlog
+# MiguelCarca&ntilde;oBlog
 
-Recreación estética ficticia de un buscador inspirado en la web española de 2009.
+Recreaci&oacute;n est&eacute;tica ficticia de un buscador inspirado en la web espa&ntilde;ola de 2009 y un blog estilo Blogger/Blogspot de la misma &eacute;poca.
 
-## Páginas
+## P&aacute;ginas
 
-- `index.html`: home del buscador.
-- `resultados.html`: resultados fijos relacionados con “Miguel Carcaño”.
-- `blog.html`: página ficticia enlazada desde el segundo resultado.
+- `index.html`: home del buscador ficticio.
+- `resultados.html`: resultados fijos relacionados con "Miguel Carca&ntilde;o".
+- `blog.html`: blog ficticio con ocho posts, sidebar antiguo y comentarios locales.
 
-El sitio no representa hechos, apoyos ni páginas reales.
+## Funcionamiento
+
+Los comentarios de `blog.html` se guardan en `localStorage`, por post y solo en el navegador del visitante.
+
+El sitio no representa hechos, apoyos ni p&aacute;ginas reales.

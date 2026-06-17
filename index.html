@@ -3,82 +3,75 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gogle España</title>
+    <title>Gogle Espa&ntilde;a</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body class="home-page">
-    <div class="browser-frame">
-      <div class="browser-titlebar">
-        <span>Gogle España - Microsoft Internet Explorer</span>
-        <span class="window-buttons" aria-hidden="true"><i></i><i></i><i></i></span>
+    <header class="google-topbar">
+      <nav class="google-nav" aria-label="Secciones principales">
+        <a class="active" href="#">La Web</a>
+        <a href="#">Im&aacute;genes</a>
+        <a href="#">Maps</a>
+        <a href="#">Noticias</a>
+        <a href="#">V&iacute;deo</a>
+        <a href="#">Gmail</a>
+        <a href="#">M&aacute;s &#9662;</a>
+      </nav>
+      <div class="google-account">
+        <a href="#">iGoogle</a>
+        <span>|</span>
+        <a href="#">Acceder</a>
       </div>
-      <div class="browser-toolbar" aria-hidden="true">
-        <span class="toolbar-button">Atrás</span>
-        <span class="toolbar-button">Adelante</span>
-        <span class="toolbar-button">Actualizar</span>
-        <span class="toolbar-address">http://www.gogle.es/</span>
-      </div>
+    </header>
 
-      <main class="page-canvas home-canvas">
-        <header class="top-links">
-          <nav class="primary-nav" aria-label="Secciones">
-            <a class="active" href="#">La Web</a>
-            <a href="#">Imágenes</a>
-            <a href="#">Maps</a>
-            <a href="#">Noticias</a>
-            <a href="#">Vídeo</a>
-            <a href="#">Gmail</a>
-            <a href="#">Más ▼</a>
-          </nav>
-          <div class="account-links">
-            <a href="#">iGoogle</a>
-            <span>|</span>
-            <a href="#">Acceder</a>
+    <main class="google-home">
+      <section class="home-search" aria-label="Buscador">
+        <h1 class="fake-logo fake-logo-large" aria-label="Gogle Espa&ntilde;a">
+          <span class="blue">G</span><span class="red">o</span><span class="yellow">g</span><span class="blue">l</span><span class="green">e</span>
+          <em>Espa&ntilde;a</em>
+        </h1>
+
+        <form class="search-form home-form" action="resultados.html" method="get">
+          <div class="home-search-row">
+            <input class="search-input" type="search" name="q" autocomplete="off" autofocus>
+            <div class="side-links" aria-label="Opciones de b&uacute;squeda">
+              <a href="#">B&uacute;squeda avanzada</a>
+              <a href="#">Preferencias</a>
+              <a href="#">Herramientas del idioma</a>
+            </div>
           </div>
-        </header>
 
-        <section class="home-search" aria-label="Buscador">
-          <h1 class="fake-logo fake-logo-large" aria-label="Gogle España">
-            <span class="blue">G</span><span class="red">o</span><span class="yellow">g</span><span class="blue">l</span><span class="green">e</span>
-            <em>España</em>
-          </h1>
+          <div class="button-row">
+            <button type="submit">Buscar con Google</button>
+            <button type="submit" name="lucky" value="1">Voy a tener suerte</button>
+          </div>
 
-          <form class="search-form home-form" action="resultados.html" method="get">
-            <div class="search-row">
-              <input class="search-input" type="search" name="q" autocomplete="off" autofocus>
-              <div class="side-links" aria-label="Opciones de búsqueda">
-                <a href="#">Búsqueda avanzada</a>
-                <a href="#">Preferencias</a>
-                <a href="#">Herramientas del idioma</a>
-              </div>
-            </div>
+          <fieldset class="radio-options">
+            <legend>Buscar en:</legend>
+            <label><input type="radio" name="scope" value="web" checked> la Web</label>
+            <label><input type="radio" name="scope" value="es"> p&aacute;ginas en espa&ntilde;ol</label>
+            <label><input type="radio" name="scope" value="spain"> p&aacute;ginas de Espa&ntilde;a</label>
+          </fieldset>
+        </form>
 
-            <div class="button-row">
-              <button type="submit">Buscar con Google</button>
-              <button type="submit" name="lucky" value="1">Voy a tener suerte</button>
-            </div>
+        <p class="promo-line"><strong>&iexcl;Nuevo!</strong> Explora el archivo ficticio con <a href="#">Gogle Earth 5.0</a></p>
+        <p class="language-line">Gogle.es ofrecido en: <a href="#">catal&agrave;</a> <a href="#">galego</a> <a href="#">euskara</a></p>
+      </section>
+    </main>
 
-            <fieldset class="radio-options">
-              <legend class="visually-hidden">Dónde buscar</legend>
-              <label><input type="radio" name="scope" value="web" checked> la Web</label>
-              <label><input type="radio" name="scope" value="es"> páginas en español</label>
-              <label><input type="radio" name="scope" value="spain"> páginas de España</label>
-            </fieldset>
-          </form>
-        </section>
-
-        <footer class="home-footer">
-          <p class="footer-links">
-            <a href="#">Programas de publicidad</a>
-            <a href="#">Soluciones Empresariales</a>
-            <a href="#">Todo acerca de Google</a>
-            <a href="#">Google.com in English</a>
-          </p>
-          <p>©2009 - <a href="#">Privacidad</a></p>
-          <p class="fiction-notice">Sitio ficticio creado como recreación estética de una web de 2009. No representa hechos, apoyos ni páginas reales.</p>
-        </footer>
-      </main>
-    </div>
+    <footer class="google-footer home-footer">
+      <p class="footer-links">
+        <a href="#">Programas de publicidad</a>
+        <span>-</span>
+        <a href="#">Soluciones Empresariales</a>
+        <span>-</span>
+        <a href="#">Todo acerca de Google</a>
+        <span>-</span>
+        <a href="#">Google.com in English</a>
+      </p>
+      <p>&copy;2009 - <a href="#">Privacidad</a></p>
+      <p class="fiction-notice">Sitio ficticio creado como recreaci&oacute;n est&eacute;tica de una web de 2009. No representa hechos, apoyos ni p&aacute;ginas reales.</p>
+    </footer>
 
     <script src="script.js"></script>
   </body>

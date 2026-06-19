@@ -48,6 +48,293 @@ button:active {
   background: #ddd;
 }
 
+.xp-shell-active {
+  height: 100vh;
+  overflow: hidden;
+  background: #2f68b4;
+}
+
+.xp-desktop {
+  height: calc(100vh - 31px);
+  padding: 0;
+  background: #2f68b4;
+}
+
+.ie-window {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #0b3f8a;
+  background: #ece9d8;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45);
+}
+
+.ie-chrome {
+  flex: 0 0 auto;
+  border-bottom: 1px solid #9ca8b6;
+  background: #ece9d8;
+  color: #000;
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 11px;
+}
+
+.ie-titlebar {
+  display: flex;
+  align-items: center;
+  height: 25px;
+  padding: 2px 3px 2px 5px;
+  background: linear-gradient(#2d8cf0, #1358b8 44%, #0c3f91 45%, #1966c8);
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, .35);
+}
+
+.ie-title-icon,
+.xp-task-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 32%, #fff 0 9%, #ffdb58 10% 21%, #1b8fd7 22% 100%);
+  color: #003b8f;
+  font-family: Georgia, serif;
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1;
+}
+
+.ie-title-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ie-window-controls {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.ie-window-controls button {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  min-height: 19px;
+  padding: 0;
+  border: 1px solid #fff;
+  border-right-color: #173a7a;
+  border-bottom-color: #173a7a;
+  border-radius: 2px;
+  background: linear-gradient(#75a9fb, #1c61c9);
+  color: #fff;
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.ie-window-controls button:last-child {
+  background: linear-gradient(#ef9b7e, #c83d1c);
+}
+
+.ie-menubar,
+.ie-linksbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 22px;
+  padding: 2px 8px;
+  border-bottom: 1px solid #d6d2c2;
+  background: #f5f4ee;
+  white-space: nowrap;
+}
+
+.ie-toolbar {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto minmax(120px, 1fr) auto;
+  align-items: center;
+  gap: 4px;
+  min-height: 32px;
+  padding: 3px 6px;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #c9c6b8;
+  background: linear-gradient(#fbfbf8, #ebe8dc);
+}
+
+.ie-round-button {
+  display: grid;
+  place-items: center;
+  width: 25px;
+  min-height: 25px;
+  padding: 0;
+  border-radius: 50%;
+  border-color: #6a91c9;
+  background: radial-gradient(circle at 35% 28%, #fff, #98c4f4 35%, #2469c7 72%);
+  color: #fff;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.ie-round-button.muted {
+  opacity: .45;
+}
+
+.ie-tool-button,
+.ie-go-button {
+  min-height: 22px;
+  padding: 1px 6px;
+  border-color: #b5b2a6;
+  background: #f6f4ec;
+  font-size: 11px;
+}
+
+.ie-address-label {
+  color: #555;
+}
+
+.ie-address-box {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  height: 22px;
+  border: 1px solid #7f9db9;
+  background: #fff;
+}
+
+.ie-address-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 21px;
+  height: 20px;
+  margin-right: 4px;
+  border-right: 1px solid #d5d5d5;
+  color: #315f9b;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.ie-address-text {
+  min-width: 0;
+  overflow: hidden;
+  color: #111;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ie-go-button {
+  min-width: 33px;
+  color: #064b05;
+  font-weight: bold;
+}
+
+.ie-linksbar {
+  gap: 14px;
+  height: 24px;
+  color: #555;
+}
+
+.ie-linksbar a {
+  color: #003399;
+}
+
+.browser-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  background: #fff;
+}
+
+.xp-taskbar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  height: 31px;
+  background: linear-gradient(#2b78da, #0f49a6 48%, #0d3f99 49%, #195fc0);
+  color: #fff;
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 11px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55);
+}
+
+.xp-start-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 98px;
+  height: 31px;
+  min-height: 31px;
+  padding: 0 12px 0 8px;
+  border: 0;
+  border-radius: 0 14px 14px 0;
+  background: linear-gradient(#75cf55, #23920d 52%, #16720a);
+  color: #fff;
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, .35);
+}
+
+.xp-start-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  background-image: url("assets/xp-start-logo.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 34px 34px;
+}
+
+.xp-task-button {
+  display: flex;
+  align-items: center;
+  width: min(280px, calc(100vw - 230px));
+  height: 24px;
+  margin-left: 6px;
+  padding: 2px 8px;
+  border: 1px solid rgba(255, 255, 255, .35);
+  border-radius: 2px;
+  background: linear-gradient(#3d8cf0, #1f63c5);
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .2);
+  overflow: hidden;
+}
+
+.xp-task-button span:last-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.xp-task-spacer {
+  flex: 1;
+}
+
+.xp-tray {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  padding: 0 10px;
+  border-left: 1px solid rgba(255, 255, 255, .35);
+  background: linear-gradient(#32a6f3, #1476cc);
+}
+
+.xp-tray-light {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #58d45a;
+  box-shadow: 0 0 2px #fff;
+}
+
 .disclaimer-notice {
   color: #666;
   font-size: 11px;
@@ -813,6 +1100,28 @@ button:active {
     padding-top: 34px;
   }
 
+  .ie-menubar,
+  .ie-linksbar {
+    gap: 10px;
+    overflow: hidden;
+  }
+
+  .ie-toolbar {
+    grid-template-columns: auto auto auto auto;
+  }
+
+  .ie-address-label {
+    grid-column: 1 / 2;
+  }
+
+  .ie-address-box {
+    grid-column: 2 / -2;
+  }
+
+  .ie-go-button {
+    grid-column: -2 / -1;
+  }
+
   .fake-logo-large {
     font-size: 48px;
   }
@@ -897,6 +1206,26 @@ button:active {
   .fake-logo-large em {
     margin-left: 168px;
     font-size: 13px;
+  }
+
+  .ie-tool-button {
+    display: none;
+  }
+
+  .ie-toolbar {
+    grid-template-columns: auto auto auto minmax(0, 1fr) auto;
+  }
+
+  .ie-address-label {
+    display: none;
+  }
+
+  .ie-address-box {
+    grid-column: 4 / 5;
+  }
+
+  .ie-go-button {
+    grid-column: 5 / 6;
   }
 
   .button-row {

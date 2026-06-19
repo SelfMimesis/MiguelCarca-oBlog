@@ -53,7 +53,7 @@ button:active {
   font-size: 11px;
 }
 
-.google-topbar {
+.searcher-topbar {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -65,25 +65,25 @@ button:active {
   font-size: 14px;
 }
 
-.google-nav,
-.google-account {
+.searcher-nav,
+.searcher-account {
   display: flex;
   gap: 12px;
   align-items: center;
   white-space: nowrap;
 }
 
-.google-nav .active {
+.searcher-nav .active {
   color: #000;
   font-weight: bold;
   text-decoration: none;
 }
 
-.google-account {
+.searcher-account {
   gap: 4px;
 }
 
-.google-home {
+.searcher-home {
   min-height: 405px;
   padding-top: 58px;
   text-align: center;
@@ -101,17 +101,19 @@ button:active {
   letter-spacing: 0;
   line-height: .9;
   text-decoration: none;
+  text-shadow: 0 1px 0 #fff, 1px 2px 2px rgba(60, 60, 60, .28);
+  white-space: nowrap;
 }
 
 .fake-logo-large {
   margin: 0 0 26px;
-  font-size: 88px;
+  font-size: 76px;
 }
 
 .fake-logo-large em {
   display: block;
-  margin-top: -6px;
-  margin-left: 170px;
+  margin-top: 0;
+  margin-left: 318px;
   color: #5b5b5b;
   font-family: Arial, Verdana, sans-serif;
   font-size: 19px;
@@ -120,25 +122,43 @@ button:active {
 }
 
 .fake-logo-small {
-  width: 150px;
+  width: 260px;
   margin-right: 8px;
-  font-size: 42px;
+  font-size: 31px;
 }
 
-.blue {
-  color: #1d43a6;
+.logo-word {
+  display: inline-block;
 }
 
-.red {
-  color: #cf2e1f;
+.logo-word-the {
+  margin-right: .11em;
+  font-size: .72em;
+  vertical-align: .13em;
 }
 
-.yellow {
-  color: #e6a400;
+.tone-1 {
+  color: #246f86;
 }
 
-.green {
-  color: #23833c;
+.tone-2 {
+  color: #8a2f78;
+}
+
+.tone-3 {
+  color: #bd7b1c;
+}
+
+.tone-4 {
+  color: #315f9b;
+}
+
+.tone-5 {
+  color: #6b7f2b;
+}
+
+.tone-6 {
+  color: #a64635;
 }
 
 .home-search-row {
@@ -212,7 +232,7 @@ button:active {
   margin: 22px 0 0;
 }
 
-.google-footer {
+.searcher-footer {
   color: #333;
   text-align: center;
   font-size: 12px;
@@ -223,7 +243,7 @@ button:active {
   padding: 0 10px 18px;
 }
 
-.google-footer p {
+.searcher-footer p {
   margin: 8px 0;
 }
 
@@ -779,26 +799,26 @@ button:active {
     font-size: 13px;
   }
 
-  .google-topbar,
-  .google-nav,
-  .google-account {
+  .searcher-topbar,
+  .searcher-nav,
+  .searcher-account {
     flex-wrap: wrap;
   }
 
-  .google-topbar {
+  .searcher-topbar {
     gap: 5px;
   }
 
-  .google-home {
+  .searcher-home {
     padding-top: 34px;
   }
 
   .fake-logo-large {
-    font-size: 58px;
+    font-size: 48px;
   }
 
   .fake-logo-large em {
-    margin-left: 112px;
+    margin-left: 204px;
     font-size: 15px;
   }
 
@@ -831,7 +851,7 @@ button:active {
 
   .fake-logo-small {
     width: auto;
-    font-size: 34px;
+    font-size: 31px;
   }
 
   .results-form .search-input {
@@ -866,8 +886,17 @@ button:active {
 }
 
 @media (max-width: 430px) {
-  .google-nav {
+  .searcher-nav {
     gap: 8px;
+  }
+
+  .fake-logo-large {
+    font-size: 40px;
+  }
+
+  .fake-logo-large em {
+    margin-left: 168px;
+    font-size: 13px;
   }
 
   .button-row {

@@ -1,6 +1,7 @@
 (function () {
   var params = new URLSearchParams(window.location.search);
-  var query = params.get("q") || "";
+  var defaultResultsQuery = "blog apoyo Miguel Carca\u00f1o";
+  var query = params.get("q") || (document.body.classList.contains("results-page") ? defaultResultsQuery : "");
   var resultInputs = document.querySelectorAll('.results-form input[name="q"]');
   var forms = document.querySelectorAll(".search-form");
 

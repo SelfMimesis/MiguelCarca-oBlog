@@ -48,7 +48,7 @@ button:active {
   background: #ddd;
 }
 
-.fiction-notice {
+.disclaimer-notice {
   color: #666;
   font-size: 11px;
 }
@@ -306,6 +306,10 @@ button:active {
   font-size: 13px;
 }
 
+.result-source {
+  color: #555;
+}
+
 .url {
   margin: 0;
   color: #008000;
@@ -522,6 +526,11 @@ button:active {
   font-size: 11px;
 }
 
+.comment-note {
+  color: #777;
+  font-size: 10px;
+}
+
 .comment button {
   min-height: 20px;
   padding: 1px 8px;
@@ -608,6 +617,37 @@ button:active {
 .mini-search button {
   min-height: 22px;
   padding: 1px 7px;
+}
+
+.poll-question {
+  font-weight: bold;
+  line-height: 1.25;
+}
+
+.poll-form {
+  display: grid;
+  gap: 6px;
+}
+
+.poll-form label {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 5px;
+  align-items: start;
+  line-height: 1.25;
+}
+
+.poll-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 3px;
+}
+
+.poll-actions button {
+  min-height: 22px;
+  padding: 1px 7px;
+  font-size: 11px;
 }
 
 .follower-grid {
@@ -732,7 +772,7 @@ button:active {
   margin: 5px 0;
 }
 
-.fiction-box {
+.disclaimer-box {
   display: inline-block;
   padding: 3px 8px;
   border: 1px solid #c9d0d0;

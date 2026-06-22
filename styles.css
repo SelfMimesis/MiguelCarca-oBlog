@@ -386,32 +386,42 @@ button:active {
   font-family: Georgia, "Times New Roman", serif;
   font-weight: bold;
   letter-spacing: 0;
-  line-height: .9;
+  line-height: .82;
   text-decoration: none;
-  text-shadow: 0 1px 0 #fff, 1px 2px 2px rgba(60, 60, 60, .28);
   white-space: nowrap;
 }
 
 .fake-logo-large {
-  margin: 0 0 26px;
-  font-size: 76px;
+  margin: 0 0 24px;
+  font-size: 78px;
+}
+
+.fake-logo em {
+  display: block;
+  color: #5b5b5b;
+  font-family: Arial, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 1;
+  text-shadow: 0 1px 0 #fff, 1px 1px 1px rgba(60, 60, 60, .2);
 }
 
 .fake-logo-large em {
-  display: block;
-  margin-top: 0;
-  margin-left: 318px;
-  color: #5b5b5b;
-  font-family: Arial, Verdana, sans-serif;
-  font-size: 19px;
-  font-style: normal;
-  font-weight: bold;
+  margin-top: -1px;
+  margin-left: 334px;
+  font-size: 18px;
 }
 
 .fake-logo-small {
-  width: 260px;
+  width: 270px;
   margin-right: 8px;
-  font-size: 31px;
+  font-size: 30px;
+}
+
+.fake-logo-small em {
+  margin-top: -1px;
+  margin-left: 130px;
+  font-size: 9px;
 }
 
 .logo-word {
@@ -424,28 +434,87 @@ button:active {
   vertical-align: .13em;
 }
 
+.logo-letter {
+  display: inline-block;
+  position: relative;
+  transform-origin: 50% 85%;
+  text-shadow:
+    0 -1px 0 rgba(255, 255, 255, .72),
+    0 1px 0 rgba(255, 255, 255, .42),
+    1px 2px 1px rgba(0, 0, 0, .24),
+    2px 4px 3px rgba(0, 0, 0, .18);
+}
+
+.logo-letter::after {
+  content: attr(data-shine);
+}
+
+.logo-t {
+  transform: translateY(-.04em) rotate(-3deg) scaleX(1.08);
+}
+
+.logo-h {
+  transform: translateY(.06em) rotate(2deg) scaleY(.94);
+}
+
+.logo-e1 {
+  transform: translateY(.01em) rotate(-1deg);
+}
+
+.logo-s {
+  transform: translateY(-.03em) rotate(-4deg) scaleX(1.06);
+}
+
+.logo-e2 {
+  transform: translateY(.04em) rotate(2deg) scaleY(.96);
+}
+
+.logo-a {
+  transform: translateY(-.06em) rotate(-2deg) scaleX(1.04);
+}
+
+.logo-r1 {
+  transform: translateY(.02em) rotate(3deg);
+}
+
+.logo-c {
+  transform: translateY(-.01em) rotate(-1deg) scaleX(1.05);
+}
+
+.logo-h2 {
+  transform: translateY(-.08em) rotate(2deg) scaleY(1.06);
+}
+
+.logo-e3 {
+  transform: translateY(.03em) rotate(-2deg);
+}
+
+.logo-r2 {
+  transform: translateY(-.03em) rotate(4deg) scaleY(1.03);
+}
+
 .tone-1 {
-  color: #246f86;
+  color: #245fa8;
 }
 
 .tone-2 {
-  color: #8a2f78;
+  color: #8a2f91;
 }
 
 .tone-3 {
-  color: #bd7b1c;
+  color: #c78818;
 }
 
 .tone-4 {
-  color: #315f9b;
+  color: #2d66a7;
 }
 
 .tone-5 {
-  color: #6b7f2b;
+  color: #5f852d;
 }
 
 .tone-6 {
-  color: #a64635;
+  color: #ad4538;
 }
 
 .home-search-row {

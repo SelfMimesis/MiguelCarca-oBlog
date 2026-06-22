@@ -1023,32 +1023,6 @@ button:active {
   margin-right: 6px;
 }
 
-.calendar {
-  width: 100%;
-  border-collapse: collapse;
-  background: #fff;
-  text-align: center;
-  font-size: 11px;
-}
-
-.calendar th,
-.calendar td {
-  width: 14.28%;
-  padding: 3px 0;
-  border: 1px solid #cbd5d5;
-}
-
-.calendar th {
-  background: #edf3f5;
-  color: #333;
-}
-
-.calendar .marked {
-  background: #dce8ff;
-  color: #0000cc;
-  font-weight: bold;
-}
-
 .blog-footer {
   padding: 10px 16px 16px;
   border-top: 1px solid #c9d0d0;

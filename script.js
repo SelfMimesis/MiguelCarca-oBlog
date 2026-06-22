@@ -210,18 +210,6 @@
     ];
   }
 
-  function updateXpClock() {
-    var clock = document.querySelector("[data-xp-clock]");
-    var now;
-
-    if (!clock) {
-      return;
-    }
-
-    now = new Date();
-    clock.textContent = pad(now.getHours()) + ":" + pad(now.getMinutes());
-  }
-
   function setupBrowserShell() {
     var body = document.body;
     var desktop;
@@ -276,7 +264,7 @@
       '<button type="button" class="xp-start-button"><span class="xp-start-icon"></span><span>Inicio</span></button>' +
       '<div class="xp-task-button"><span class="xp-task-icon">e</span><span data-xp-task-label></span></div>' +
       '<div class="xp-task-spacer"></div>' +
-      '<div class="xp-tray"><span>ES</span><span class="xp-tray-light"></span><span data-xp-clock></span></div>';
+      '<div class="xp-tray"><span>ES</span><span class="xp-tray-light"></span></div>';
 
     scripts = body.querySelectorAll("script");
     child = body.firstChild;
@@ -320,8 +308,6 @@
       }
     }
 
-    updateXpClock();
-    setInterval(updateXpClock, 30000);
   }
 
   for (var i = 0; i < resultInputs.length; i += 1) {

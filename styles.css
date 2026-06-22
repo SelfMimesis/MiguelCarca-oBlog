@@ -438,15 +438,15 @@ button:active {
   display: inline-block;
   position: relative;
   transform-origin: 50% 85%;
+  -webkit-text-stroke: .35px rgba(45, 45, 45, .22);
+  filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, .28));
   text-shadow:
-    0 -1px 0 rgba(255, 255, 255, .72),
-    0 1px 0 rgba(255, 255, 255, .42),
-    1px 2px 1px rgba(0, 0, 0, .24),
-    2px 4px 3px rgba(0, 0, 0, .18);
-}
-
-.logo-letter::after {
-  content: attr(data-shine);
+    -1px -1px 0 rgba(255, 255, 255, .88),
+    0 -1px 1px rgba(255, 255, 255, .72),
+    1px 0 0 rgba(0, 0, 0, .16),
+    0 1px 0 rgba(0, 0, 0, .28),
+    1px 2px 0 rgba(0, 0, 0, .18),
+    2px 3px 2px rgba(0, 0, 0, .18);
 }
 
 .logo-t {
@@ -494,27 +494,71 @@ button:active {
 }
 
 .tone-1 {
-  color: #245fa8;
+  color: #6f86e1;
 }
 
 .tone-2 {
-  color: #8a2f91;
+  color: #55a538;
 }
 
 .tone-3 {
-  color: #c78818;
+  color: #fbb904;
 }
 
 .tone-4 {
-  color: #2d66a7;
+  color: #f74524;
 }
 
 .tone-5 {
-  color: #5f852d;
+  color: #f7e5e5;
 }
 
 .tone-6 {
-  color: #ad4538;
+  color: #6f86e1;
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .logo-letter {
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .tone-1 {
+    background-image:
+      radial-gradient(ellipse at 32% 18%, rgba(255, 255, 255, .95) 0 8%, rgba(255, 255, 255, .34) 9% 20%, rgba(255, 255, 255, 0) 42%),
+      linear-gradient(#cad5ff 0%, #8298ef 24%, #6f86e1 48%, #526dcd 64%, #263f9d 100%);
+  }
+
+  .tone-2 {
+    background-image:
+      radial-gradient(ellipse at 32% 18%, rgba(255, 255, 255, .9) 0 8%, rgba(255, 255, 255, .32) 9% 20%, rgba(255, 255, 255, 0) 42%),
+      linear-gradient(#dff5d3 0%, #79c75b 24%, #55a538 49%, #3f8a27 66%, #236a14 100%);
+  }
+
+  .tone-3 {
+    background-image:
+      radial-gradient(ellipse at 32% 18%, rgba(255, 255, 255, .92) 0 8%, rgba(255, 255, 255, .34) 9% 20%, rgba(255, 255, 255, 0) 42%),
+      linear-gradient(#fff3ae 0%, #ffd351 23%, #fbb904 49%, #dc9600 67%, #9b6500 100%);
+  }
+
+  .tone-4 {
+    background-image:
+      radial-gradient(ellipse at 32% 18%, rgba(255, 255, 255, .92) 0 8%, rgba(255, 255, 255, .32) 9% 20%, rgba(255, 255, 255, 0) 42%),
+      linear-gradient(#ffd0c6 0%, #ff7255 24%, #f74524 50%, #d53118 67%, #99200f 100%);
+  }
+
+  .tone-5 {
+    background-image:
+      radial-gradient(ellipse at 32% 18%, rgba(255, 255, 255, .96) 0 8%, rgba(255, 255, 255, .36) 9% 20%, rgba(255, 255, 255, 0) 42%),
+      linear-gradient(#ffffff 0%, #f7e5e5 27%, #e7caca 52%, #cfabab 70%, #9f7777 100%);
+  }
+
+  .tone-6 {
+    background-image:
+      radial-gradient(ellipse at 32% 18%, rgba(255, 255, 255, .95) 0 8%, rgba(255, 255, 255, .34) 9% 20%, rgba(255, 255, 255, 0) 42%),
+      linear-gradient(#cad5ff 0%, #8298ef 24%, #6f86e1 48%, #526dcd 64%, #263f9d 100%);
+  }
 }
 
 .home-search-row {

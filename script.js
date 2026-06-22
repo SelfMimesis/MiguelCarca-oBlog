@@ -184,8 +184,8 @@
 
   function getBrowserAddresses() {
     var encodedQuery = encodeURIComponent(query || defaultResultsQuery);
-    var searchUrl = "http://thesearcher.es/search?q=" + encodedQuery;
-    var homeUrl = "http://thesearcher.es/";
+    var searchUrl = "http://www.thesearcher.es/search?q=" + encodedQuery;
+    var homeUrl = "www.thesearcher.es";
     var blogUrl = "http://apoyosamiguel.blogbikes.com/";
 
     if (document.body.classList.contains("blog-page")) {
@@ -196,17 +196,12 @@
 
     if (document.body.classList.contains("results-page")) {
       return [
-        searchUrl,
-        "https://www.lavozdesevilla.es/sucesos/noticia3541.html",
-        "https://www.elheraldonacional.es/cronica/fuente.apx",
-        "https://www.magazinext.es/actualidad/article567.html",
-        blogUrl
+        searchUrl
       ];
     }
 
     return [
-      homeUrl,
-      searchUrl
+      homeUrl
     ];
   }
 

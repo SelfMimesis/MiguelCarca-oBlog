@@ -62,15 +62,6 @@
     document.title = (query || defaultResultsQuery) + " - Buscar con The Searcher";
   }
 
-  function pad(value) {
-    return value < 10 ? "0" + value : String(value);
-  }
-
-  function fakeCommentDate() {
-    var now = new Date();
-    return "martes, 24 de marzo de 2009, " + pad(now.getHours()) + ":" + pad(now.getMinutes());
-  }
-
   function readStoredComments(postId) {
     try {
       return JSON.parse(localStorage.getItem("blog-comments-" + postId) || "[]");
@@ -113,17 +104,14 @@
     var wrapper = document.createElement("div");
     var meta = document.createElement("p");
     var name = document.createElement("strong");
-    var date = document.createElement("span");
     var body = document.createElement("p");
     var button = document.createElement("button");
 
     wrapper.className = "comment";
     meta.className = "comment-meta";
     name.textContent = comment.name || "Anonimo";
-    date.textContent = comment.date || fakeCommentDate();
     meta.appendChild(name);
-    meta.appendChild(document.createTextNode(" dijo... "));
-    meta.appendChild(date);
+    meta.appendChild(document.createTextNode(" dijo..."));
 
     body.textContent = comment.text || "";
     button.type = "button";
@@ -173,8 +161,7 @@
 
         comment = {
           name: name,
-          text: text,
-          date: fakeCommentDate()
+          text: text
         };
 
         comments.push(comment);

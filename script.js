@@ -2,8 +2,7 @@
   var params = new URLSearchParams(window.location.search);
   var defaultResultsQuery = "blog apoyo Miguel Carca\u00f1o";
   var query = params.get("q") || (document.body.classList.contains("results-page") ? defaultResultsQuery : "");
-  var resultInputs = document.querySelectorAll('.results-form input[name="q"]');
-  var forms = document.querySelectorAll(".search-form");
+  var visitCounterTimer = null;
   var commentAvatarPaths = [
     "assets/comment-avatars/avatar-01.jpg",
     "assets/comment-avatars/avatar-02.jpg",
@@ -44,8 +43,16 @@
     var input = form.querySelector('input[name="q"]');
     var value = input && input.value ? input.value : "";
     var encoded = encodeURIComponent(value.trim());
+    var targetUrl = new URL("resultados.html?q=" + encoded, window.location.href);
 
-    window.location.href = "resultados.html?q=" + encoded;
+    if (shouldNavigateWithinShell(targetUrl)) {
+      navigateWithinShell(targetUrl).catch(function () {
+        window.location.href = targetUrl.href;
+      });
+      return;
+    }
+
+    window.location.href = targetUrl.href;
   }
 
   function setupResultsQueryText() {
@@ -137,10 +144,18 @@
         continue;
       }
 
-      for (var j = 0; j < stored.length; j += 1) {
-        appendComment(list, stored[j]);
+      if (list.getAttribute("data-stored-comments-loaded") !== "true") {
+        for (var j = 0; j < stored.length; j += 1) {
+          appendComment(list, stored[j]);
+        }
+        list.setAttribute("data-stored-comments-loaded", "true");
       }
 
+      if (form.getAttribute("data-comments-ready") === "true") {
+        continue;
+      }
+
+      form.setAttribute("data-comments-ready", "true");
       form.addEventListener("submit", function (event) {
         event.preventDefault();
 
@@ -195,6 +210,11 @@
     var key = "blog-fake-visits-2009";
     var value;
 
+    if (visitCounterTimer) {
+      clearInterval(visitCounterTimer);
+      visitCounterTimer = null;
+    }
+
     if (!counter) {
       return;
     }
@@ -216,7 +236,7 @@
     }
     renderVisitCounter(counter, value);
 
-    setInterval(function () {
+    visitCounterTimer = setInterval(function () {
       value += 1;
       try {
         localStorage.setItem(key, String(value));
@@ -232,7 +252,7 @@
     }
 
     if (document.body.classList.contains("results-page")) {
-      return "blog apoyo Miguel Carca\u00f1o - The Searcher - Windows Internet Explorer";
+      return (query || defaultResultsQuery) + " - The Searcher - Windows Internet Explorer";
     }
 
     return "The Searcher Espa\u00f1a - Windows Internet Explorer";
@@ -259,6 +279,192 @@
     return [
       homeUrl
     ];
+  }
+
+  function updateCurrentQueryFromUrl(url) {
+    params = new URLSearchParams(url.search);
+    query = params.get("q") || (document.body.classList.contains("results-page") ? defaultResultsQuery : "");
+  }
+
+  function updateBrowserChrome() {
+    var titleNode = document.querySelector("[data-browser-title]");
+    var addressNode = document.querySelector("[data-browser-address]");
+    var taskLabel = document.querySelector("[data-xp-task-label]");
+    var addresses = getBrowserAddresses();
+
+    if (titleNode) {
+      titleNode.textContent = getBrowserTitle();
+    }
+
+    if (taskLabel) {
+      taskLabel.textContent = getBrowserTitle().replace(" - Windows Internet Explorer", "");
+    }
+
+    if (addressNode && addresses.length) {
+      addressNode.textContent = addresses[0];
+    }
+  }
+
+  function setupResultsInputs() {
+    var resultInputs = document.querySelectorAll('.results-form input[name="q"]');
+
+    for (var i = 0; i < resultInputs.length; i += 1) {
+      resultInputs[i].value = query;
+    }
+  }
+
+  function setupSearchForms() {
+    var forms = document.querySelectorAll('.search-form, .mini-search');
+
+    for (var i = 0; i < forms.length; i += 1) {
+      if (forms[i].getAttribute("data-search-ready") === "true") {
+        continue;
+      }
+
+      forms[i].setAttribute("data-search-ready", "true");
+      forms[i].addEventListener("submit", submitToResults);
+    }
+  }
+
+  function initializePageContent() {
+    setupResultsInputs();
+    setupResultsQueryText();
+    setupSearchForms();
+    setupBlogComments();
+    setupVisitCounter();
+    updateBrowserChrome();
+  }
+
+  function isShellPageUrl(url) {
+    var path = url.pathname;
+
+    if (url.origin !== window.location.origin) {
+      return false;
+    }
+
+    return /(?:^|\/)(index|resultados|blog)\.html$/.test(path);
+  }
+
+  function shouldNavigateWithinShell(url) {
+    return !!getFullscreenElement() &&
+      !!document.querySelector(".browser-content") &&
+      isShellPageUrl(url);
+  }
+
+  function setBodyPageClasses(nextBodyClassName) {
+    var isFullscreen = !!getFullscreenElement();
+
+    document.body.className = nextBodyClassName || "";
+    document.body.classList.add("xp-shell-active");
+
+    if (isFullscreen) {
+      document.body.classList.add("is-fullscreen");
+    }
+  }
+
+  function replaceBrowserContentFromDocument(nextDocument) {
+    var content = document.querySelector(".browser-content");
+    var nodes = nextDocument.body.childNodes;
+
+    if (!content) {
+      return false;
+    }
+
+    content.textContent = "";
+
+    for (var i = 0; i < nodes.length; i += 1) {
+      if (nodes[i].nodeType === 1 && nodes[i].tagName.toLowerCase() === "script") {
+        continue;
+      }
+
+      content.appendChild(document.importNode(nodes[i], true));
+    }
+
+    return true;
+  }
+
+  function navigateWithinShell(url, options) {
+    var nextUrl = new URL(url.href);
+    var settings = options || {};
+
+    return fetch(nextUrl.href, { cache: "no-cache" })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("No se pudo cargar la pagina");
+        }
+
+        return response.text();
+      })
+      .then(function (html) {
+        var parser = new DOMParser();
+        var nextDocument = parser.parseFromString(html, "text/html");
+
+        if (!replaceBrowserContentFromDocument(nextDocument)) {
+          window.location.href = nextUrl.href;
+          return;
+        }
+
+        setBodyPageClasses(nextDocument.body.className);
+        document.title = nextDocument.title;
+
+        if (settings.replaceHistory) {
+          window.history.replaceState({ shellPage: true }, "", nextUrl.href);
+        } else {
+          window.history.pushState({ shellPage: true }, "", nextUrl.href);
+        }
+
+        updateCurrentQueryFromUrl(nextUrl);
+        initializePageContent();
+        syncFullscreenState();
+      });
+  }
+
+  function handleInternalLinkClick(event) {
+    var link;
+    var href;
+    var targetUrl;
+
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+      return;
+    }
+
+    link = event.target.closest ? event.target.closest("a[href]") : null;
+    if (!link || (link.target && link.target !== "_self")) {
+      return;
+    }
+
+    href = link.getAttribute("href");
+    if (!href || href.charAt(0) === "#") {
+      return;
+    }
+
+    targetUrl = new URL(href, window.location.href);
+    if (!shouldNavigateWithinShell(targetUrl)) {
+      return;
+    }
+
+    event.preventDefault();
+    navigateWithinShell(targetUrl).catch(function () {
+      window.location.href = targetUrl.href;
+    });
+  }
+
+  function setupInternalNavigation() {
+    if (document.body.getAttribute("data-shell-navigation-ready") === "true") {
+      return;
+    }
+
+    document.body.setAttribute("data-shell-navigation-ready", "true");
+    document.addEventListener("click", handleInternalLinkClick);
+    window.addEventListener("popstate", function () {
+      var targetUrl = new URL(window.location.href);
+
+      if (shouldNavigateWithinShell(targetUrl)) {
+        navigateWithinShell(targetUrl, { replaceHistory: true }).catch(function () {
+          window.location.href = targetUrl.href;
+        });
+      }
+    });
   }
 
   function getFullscreenElement() {
@@ -331,6 +537,23 @@
     syncFullscreenState();
   }
 
+  function setupBrowserNavigationButtons() {
+    var backButton = document.querySelector('[data-browser-nav="back"]');
+    var forwardButton = document.querySelector('[data-browser-nav="forward"]');
+
+    if (backButton) {
+      backButton.addEventListener("click", function () {
+        window.history.back();
+      });
+    }
+
+    if (forwardButton) {
+      forwardButton.addEventListener("click", function () {
+        window.history.forward();
+      });
+    }
+  }
+
   function setupBrowserShell() {
     var body = document.body;
     var desktop;
@@ -341,10 +564,6 @@
     var scripts;
     var nodes = [];
     var child;
-    var addressNode;
-    var addresses;
-    var addressIndex = 0;
-    var taskLabel;
     var maximizeButton;
 
     if (body.classList.contains("xp-shell-active")) {
@@ -372,8 +591,8 @@
       '</div>' +
       '<div class="ie-menubar"><span>Archivo</span><span>Edici&oacute;n</span><span>Ver</span><span>Favoritos</span><span>Herramientas</span><span>Ayuda</span></div>' +
       '<div class="ie-toolbar">' +
-        '<button type="button" class="ie-round-button">&lt;</button>' +
-        '<button type="button" class="ie-round-button muted">&gt;</button>' +
+        '<button type="button" class="ie-round-button" data-browser-nav="back" aria-label="Atr&aacute;s" title="Atr&aacute;s">&lt;</button>' +
+        '<button type="button" class="ie-round-button" data-browser-nav="forward" aria-label="Adelante" title="Adelante">&gt;</button>' +
         '<button type="button" class="ie-tool-button">Detener</button>' +
         '<button type="button" class="ie-tool-button">Actualizar</button>' +
         '<label class="ie-address-label">Direcci&oacute;n</label>' +
@@ -410,46 +629,19 @@
     body.insertBefore(taskbar, scripts.length ? scripts[0] : null);
     body.classList.add("xp-shell-active");
 
-    addressNode = body.querySelector("[data-browser-address]");
-    addresses = getBrowserAddresses();
-    taskLabel = body.querySelector("[data-xp-task-label]");
-    body.querySelector("[data-browser-title]").textContent = getBrowserTitle();
-
-    if (taskLabel) {
-      taskLabel.textContent = getBrowserTitle().replace(" - Windows Internet Explorer", "");
-    }
+    updateBrowserChrome();
 
     maximizeButton = body.querySelector('[data-window-control="maximize"]');
     if (maximizeButton) {
       maximizeButton.addEventListener("click", toggleFullscreen);
     }
 
+    setupBrowserNavigationButtons();
     setupFullscreenSync();
 
-    if (addressNode && addresses.length) {
-      addressNode.textContent = addresses[0];
-
-      if (addresses.length > 1) {
-        setInterval(function () {
-          addressIndex = (addressIndex + 1) % addresses.length;
-          addressNode.textContent = addresses[addressIndex];
-        }, 3200);
-      }
-    }
-
   }
 
-  for (var i = 0; i < resultInputs.length; i += 1) {
-    resultInputs[i].value = query;
-  }
-
-  setupResultsQueryText();
-
-  for (var j = 0; j < forms.length; j += 1) {
-    forms[j].addEventListener("submit", submitToResults);
-  }
-
-  setupBlogComments();
-  setupVisitCounter();
   setupBrowserShell();
+  initializePageContent();
+  setupInternalNavigation();
 }());

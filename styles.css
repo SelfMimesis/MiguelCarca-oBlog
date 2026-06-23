@@ -456,14 +456,14 @@ button:active {
 .fake-logo-small {
   width: max-content;
   flex: 0 0 auto;
-  margin-right: 12px;
-  font-size: 32px;
+  margin-right: 0;
+  font-size: 38px;
 }
 
 .fake-logo-small em {
   margin-top: -1px;
   margin-left: 0;
-  font-size: 7px;
+  font-size: 8px;
 }
 
 .logo-word {
@@ -634,6 +634,9 @@ button:active {
 }
 
 .results-canvas {
+  --results-gutter: 8px;
+  --results-logo-column: 235px;
+  --results-header-gap: 14px;
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
@@ -642,9 +645,11 @@ button:active {
 }
 
 .results-searchbar {
-  display: flex;
+  display: grid;
+  grid-template-columns: var(--results-logo-column) minmax(0, 1fr);
+  column-gap: var(--results-header-gap);
   align-items: center;
-  padding: 16px 8px 8px;
+  padding: 16px var(--results-gutter) 8px;
 }
 
 .results-form {
@@ -663,7 +668,7 @@ button:active {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 3px 0 8px 178px;
+  margin: 3px 0 8px calc(var(--results-gutter) + var(--results-logo-column) + var(--results-header-gap));
   font-size: 14px;
 }
 
@@ -1259,8 +1264,8 @@ button:active {
   }
 
   .results-searchbar {
+    grid-template-columns: 1fr;
     align-items: flex-start;
-    flex-direction: column;
     gap: 5px;
   }
 

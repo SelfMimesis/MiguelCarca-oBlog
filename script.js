@@ -4,6 +4,38 @@
   var query = params.get("q") || (document.body.classList.contains("results-page") ? defaultResultsQuery : "");
   var resultInputs = document.querySelectorAll('.results-form input[name="q"]');
   var forms = document.querySelectorAll(".search-form");
+  var commentAvatarPaths = [
+    "assets/comment-avatars/avatar-01.jpg",
+    "assets/comment-avatars/avatar-02.jpg",
+    "assets/comment-avatars/avatar-03.jpg",
+    "assets/comment-avatars/avatar-04.jpg",
+    "assets/comment-avatars/avatar-05.jpg",
+    "assets/comment-avatars/avatar-06.jpg",
+    "assets/comment-avatars/avatar-32.jpg",
+    "assets/comment-avatars/avatar-31.jpg",
+    "assets/comment-avatars/avatar-09.jpg",
+    "assets/comment-avatars/avatar-10.jpg",
+    "assets/comment-avatars/avatar-11.jpg",
+    "assets/comment-avatars/avatar-12.jpg",
+    "assets/comment-avatars/avatar-13.jpg",
+    "assets/comment-avatars/avatar-14.jpg",
+    "assets/comment-avatars/avatar-15.jpg",
+    "assets/comment-avatars/avatar-16.jpg",
+    "assets/comment-avatars/avatar-17.jpg",
+    "assets/comment-avatars/avatar-18.jpg",
+    "assets/comment-avatars/avatar-19.jpg",
+    "assets/comment-avatars/avatar-20.jpg",
+    "assets/comment-avatars/avatar-21.jpg",
+    "assets/comment-avatars/avatar-22.jpg",
+    "assets/comment-avatars/avatar-23.jpg",
+    "assets/comment-avatars/avatar-24.jpg",
+    "assets/comment-avatars/avatar-25.jpg",
+    "assets/comment-avatars/avatar-26.jpg",
+    "assets/comment-avatars/avatar-27.jpg",
+    "assets/comment-avatars/avatar-28.jpg",
+    "assets/comment-avatars/avatar-29.jpg",
+    "assets/comment-avatars/avatar-30.jpg"
+  ];
 
   function submitToResults(event) {
     event.preventDefault();
@@ -14,6 +46,20 @@
     var encoded = encodeURIComponent(value.trim());
 
     window.location.href = "resultados.html?q=" + encoded;
+  }
+
+  function setupResultsQueryText() {
+    var resultQuery = document.querySelector("[data-results-query]");
+
+    if (!document.body.classList.contains("results-page")) {
+      return;
+    }
+
+    if (resultQuery) {
+      resultQuery.textContent = query || defaultResultsQuery;
+    }
+
+    document.title = (query || defaultResultsQuery) + " - Buscar con The Searcher";
   }
 
   function pad(value) {
@@ -41,6 +87,26 @@
     }
 
     return true;
+  }
+
+  function decorateCommentAvatars() {
+    var comments = document.querySelectorAll(".comments-list .comment");
+
+    for (var i = 0; i < comments.length; i += 1) {
+      var comment = comments[i];
+      var avatar = comment.querySelector(".comment-avatar");
+      var name = comment.querySelector(".comment-meta strong");
+      var avatarPath = commentAvatarPaths[i % commentAvatarPaths.length];
+
+      if (!avatar) {
+        avatar = document.createElement("img");
+        avatar.className = "comment-avatar";
+        comment.insertBefore(avatar, comment.firstChild);
+      }
+
+      avatar.src = avatarPath;
+      avatar.alt = "Avatar de " + (name ? name.textContent : "usuario");
+    }
   }
 
   function appendComment(list, comment) {
@@ -114,9 +180,12 @@
         comments.push(comment);
         writeStoredComments(currentPostId, comments);
         appendComment(currentList, comment);
+        decorateCommentAvatars();
         currentForm.reset();
       });
     }
+
+    decorateCommentAvatars();
   }
 
   function renderVisitCounter(counter, value) {
@@ -205,6 +274,76 @@
     ];
   }
 
+  function getFullscreenElement() {
+    return document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.msFullscreenElement;
+  }
+
+  function requestFullscreen(element) {
+    if (element.requestFullscreen) {
+      return element.requestFullscreen();
+    }
+
+    if (element.webkitRequestFullscreen) {
+      return element.webkitRequestFullscreen();
+    }
+
+    if (element.msRequestFullscreen) {
+      return element.msRequestFullscreen();
+    }
+
+    return null;
+  }
+
+  function exitFullscreen() {
+    if (document.exitFullscreen) {
+      return document.exitFullscreen();
+    }
+
+    if (document.webkitExitFullscreen) {
+      return document.webkitExitFullscreen();
+    }
+
+    if (document.msExitFullscreen) {
+      return document.msExitFullscreen();
+    }
+
+    return null;
+  }
+
+  function toggleFullscreen() {
+    if (getFullscreenElement()) {
+      exitFullscreen();
+      return;
+    }
+
+    requestFullscreen(document.documentElement);
+  }
+
+  function syncFullscreenState() {
+    var isFullscreen = !!getFullscreenElement();
+    var maximizeButton = document.querySelector('[data-window-control="maximize"]');
+
+    document.body.classList.toggle("is-fullscreen", isFullscreen);
+
+    if (maximizeButton) {
+      maximizeButton.setAttribute("aria-pressed", isFullscreen ? "true" : "false");
+      maximizeButton.setAttribute("title", isFullscreen ? "Salir de pantalla completa" : "Pantalla completa");
+    }
+
+    setTimeout(function () {
+      window.dispatchEvent(new Event("resize"));
+    }, 0);
+  }
+
+  function setupFullscreenSync() {
+    document.addEventListener("fullscreenchange", syncFullscreenState);
+    document.addEventListener("webkitfullscreenchange", syncFullscreenState);
+    document.addEventListener("MSFullscreenChange", syncFullscreenState);
+    syncFullscreenState();
+  }
+
   function setupBrowserShell() {
     var body = document.body;
     var desktop;
@@ -219,6 +358,7 @@
     var addresses;
     var addressIndex = 0;
     var taskLabel;
+    var maximizeButton;
 
     if (body.classList.contains("xp-shell-active")) {
       return;
@@ -241,7 +381,7 @@
       '<div class="ie-titlebar">' +
         '<span class="ie-title-icon">e</span>' +
         '<span class="ie-title-text" data-browser-title></span>' +
-        '<span class="ie-window-controls"><button type="button">_</button><button type="button">[]</button><button type="button">X</button></span>' +
+        '<span class="ie-window-controls"><button type="button">_</button><button type="button" data-window-control="maximize" aria-label="Pantalla completa">[]</button><button type="button">X</button></span>' +
       '</div>' +
       '<div class="ie-menubar"><span>Archivo</span><span>Edici&oacute;n</span><span>Ver</span><span>Favoritos</span><span>Herramientas</span><span>Ayuda</span></div>' +
       '<div class="ie-toolbar">' +
@@ -292,6 +432,13 @@
       taskLabel.textContent = getBrowserTitle().replace(" - Windows Internet Explorer", "");
     }
 
+    maximizeButton = body.querySelector('[data-window-control="maximize"]');
+    if (maximizeButton) {
+      maximizeButton.addEventListener("click", toggleFullscreen);
+    }
+
+    setupFullscreenSync();
+
     if (addressNode && addresses.length) {
       addressNode.textContent = addresses[0];
 
@@ -308,6 +455,8 @@
   for (var i = 0; i < resultInputs.length; i += 1) {
     resultInputs[i].value = query;
   }
+
+  setupResultsQueryText();
 
   for (var j = 0; j < forms.length; j += 1) {
     forms[j].addEventListener("submit", submitToResults);

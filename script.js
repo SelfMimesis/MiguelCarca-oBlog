@@ -3,6 +3,7 @@
   var defaultResultsQuery = "blog apoyo Miguel Carca\u00f1o";
   var query = params.get("q") || (document.body.classList.contains("results-page") ? defaultResultsQuery : "");
   var visitCounterTimer = null;
+  var atlasLayoutStorageKey = "searcher-atlas-layout";
   var commentAvatarPaths = [
     "assets/comment-avatars/avatar-01.jpg",
     "assets/comment-avatars/avatar-02.jpg",
@@ -305,6 +306,58 @@
     }
   }
 
+  function isAtlasLayoutEnabled() {
+    try {
+      return localStorage.getItem(atlasLayoutStorageKey) === "1280x800";
+    } catch (error) {
+      return document.body.classList.contains("atlas-1280x800");
+    }
+  }
+
+  function setAtlasLayoutEnabled(isEnabled) {
+    try {
+      if (isEnabled) {
+        localStorage.setItem(atlasLayoutStorageKey, "1280x800");
+      } else {
+        localStorage.removeItem(atlasLayoutStorageKey);
+      }
+    } catch (error) {
+    }
+  }
+
+  function applyAtlasLayoutState(isEnabled) {
+    var active = typeof isEnabled === "boolean" ? isEnabled : isAtlasLayoutEnabled();
+    var toggles = document.querySelectorAll("[data-atlas-toggle]");
+
+    document.body.classList.toggle("atlas-1280x800", active);
+
+    for (var i = 0; i < toggles.length; i += 1) {
+      toggles[i].setAttribute("aria-pressed", active ? "true" : "false");
+      toggles[i].setAttribute("title", active ? "Volver a 1366x768" : "Adaptar a 1280x800");
+    }
+  }
+
+  function setupAtlasToggle() {
+    var toggles = document.querySelectorAll("[data-atlas-toggle]");
+
+    for (var i = 0; i < toggles.length; i += 1) {
+      if (toggles[i].getAttribute("data-atlas-ready") === "true") {
+        continue;
+      }
+
+      toggles[i].setAttribute("data-atlas-ready", "true");
+      toggles[i].addEventListener("click", function (event) {
+        var nextState;
+
+        event.preventDefault();
+        nextState = !document.body.classList.contains("atlas-1280x800");
+        setAtlasLayoutEnabled(nextState);
+        applyAtlasLayoutState(nextState);
+        window.dispatchEvent(new Event("resize"));
+      });
+    }
+  }
+
   function setupResultsInputs() {
     var resultInputs = document.querySelectorAll('.results-form input[name="q"]');
 
@@ -327,6 +380,8 @@
   }
 
   function initializePageContent() {
+    applyAtlasLayoutState();
+    setupAtlasToggle();
     setupResultsInputs();
     setupResultsQueryText();
     setupSearchForms();
@@ -356,6 +411,7 @@
 
     document.body.className = nextBodyClassName || "";
     document.body.classList.add("xp-shell-active");
+    applyAtlasLayoutState();
 
     if (isFullscreen) {
       document.body.classList.add("is-fullscreen");
@@ -641,6 +697,7 @@
 
   }
 
+  applyAtlasLayoutState();
   setupBrowserShell();
   initializePageContent();
   setupInternalNavigation();

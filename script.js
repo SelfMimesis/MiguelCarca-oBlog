@@ -249,14 +249,14 @@
 
   function getBrowserTitle() {
     if (document.body.classList.contains("blog-page")) {
-      return "Todos con Miguel Carca\u00f1o - Windows Internet Explorer";
+      return "Todos con Miguel Carca\u00f1o - Navegador Web";
     }
 
     if (document.body.classList.contains("results-page")) {
-      return (query || defaultResultsQuery) + " - The Searcher - Windows Internet Explorer";
+      return (query || defaultResultsQuery) + " - The Searcher - Navegador Web";
     }
 
-    return "The Searcher Espa\u00f1a - Windows Internet Explorer";
+    return "The Searcher Espa\u00f1a - Navegador Web";
   }
 
   function getBrowserAddresses() {
@@ -290,7 +290,7 @@
   function updateBrowserChrome() {
     var titleNode = document.querySelector("[data-browser-title]");
     var addressNode = document.querySelector("[data-browser-address]");
-    var taskLabel = document.querySelector("[data-xp-task-label]");
+    var taskLabel = document.querySelector("[data-web-task-label]");
     var addresses = getBrowserAddresses();
 
     if (titleNode) {
@@ -298,7 +298,7 @@
     }
 
     if (taskLabel) {
-      taskLabel.textContent = getBrowserTitle().replace(" - Windows Internet Explorer", "");
+      taskLabel.textContent = getBrowserTitle().replace(" - Navegador Web", "");
     }
 
     if (addressNode && addresses.length) {
@@ -410,7 +410,7 @@
     var isFullscreen = !!getFullscreenElement();
 
     document.body.className = nextBodyClassName || "";
-    document.body.classList.add("xp-shell-active");
+    document.body.classList.add("web-shell-active");
     applyAtlasLayoutState();
 
     if (isFullscreen) {
@@ -622,7 +622,7 @@
     var child;
     var maximizeButton;
 
-    if (body.classList.contains("xp-shell-active")) {
+    if (body.classList.contains("web-shell-active")) {
       return;
     }
 
@@ -632,36 +632,36 @@
     content = document.createElement("div");
     taskbar = document.createElement("footer");
 
-    desktop.className = "xp-desktop";
-    browserWindow.className = "ie-window";
-    browserWindow.setAttribute("aria-label", "Windows Internet Explorer");
-    chrome.className = "ie-chrome";
+    desktop.className = "web-desktop";
+    browserWindow.className = "browser-window";
+    browserWindow.setAttribute("aria-label", "Navegador Web");
+    chrome.className = "browser-chrome";
     content.className = "browser-content";
-    taskbar.className = "xp-taskbar";
+    taskbar.className = "web-taskbar";
 
     chrome.innerHTML =
-      '<div class="ie-titlebar">' +
-        '<span class="ie-title-icon">e</span>' +
-        '<span class="ie-title-text" data-browser-title></span>' +
-        '<span class="ie-window-controls"><button type="button">_</button><button type="button" data-window-control="maximize" aria-label="Pantalla completa">[]</button><button type="button">X</button></span>' +
+      '<div class="browser-titlebar">' +
+        '<span class="browser-title-icon">N</span>' +
+        '<span class="browser-title-text" data-browser-title></span>' +
+        '<span class="browser-window-controls"><button type="button">_</button><button type="button" data-window-control="maximize" aria-label="Pantalla completa">[]</button><button type="button">X</button></span>' +
       '</div>' +
-      '<div class="ie-menubar"><span>Archivo</span><span>Edici&oacute;n</span><span>Ver</span><span>Favoritos</span><span>Herramientas</span><span>Ayuda</span></div>' +
-      '<div class="ie-toolbar">' +
-        '<button type="button" class="ie-round-button" data-browser-nav="back" aria-label="Atr&aacute;s" title="Atr&aacute;s">&lt;</button>' +
-        '<button type="button" class="ie-round-button" data-browser-nav="forward" aria-label="Adelante" title="Adelante">&gt;</button>' +
-        '<button type="button" class="ie-tool-button">Detener</button>' +
-        '<button type="button" class="ie-tool-button">Actualizar</button>' +
-        '<label class="ie-address-label">Direcci&oacute;n</label>' +
-        '<div class="ie-address-box"><span class="ie-address-icon">TS</span><span class="ie-address-text" data-browser-address></span></div>' +
-        '<button type="button" class="ie-go-button">Ir</button>' +
+      '<div class="browser-menubar"><span>Archivo</span><span>Edici&oacute;n</span><span>Ver</span><span>Favoritos</span><span>Herramientas</span><span>Ayuda</span></div>' +
+      '<div class="browser-toolbar">' +
+        '<button type="button" class="browser-round-button" data-browser-nav="back" aria-label="Atr&aacute;s" title="Atr&aacute;s">&lt;</button>' +
+        '<button type="button" class="browser-round-button" data-browser-nav="forward" aria-label="Adelante" title="Adelante">&gt;</button>' +
+        '<button type="button" class="browser-tool-button">Detener</button>' +
+        '<button type="button" class="browser-tool-button">Actualizar</button>' +
+        '<label class="browser-address-label">Direcci&oacute;n</label>' +
+        '<div class="browser-address-box"><span class="browser-address-icon">TS</span><span class="browser-address-text" data-browser-address></span></div>' +
+        '<button type="button" class="browser-go-button">Ir</button>' +
       '</div>' +
-      '<div class="ie-linksbar"><span>Favoritos</span><a href="#">The Searcher</a><a href="#">Noticias</a><a href="#">Correo</a><a href="#">Blogbikes</a></div>';
+      '<div class="browser-linksbar"><span>Favoritos</span><a href="#">The Searcher</a><a href="#">Noticias</a><a href="#">Correo</a><a href="#">Blogbikes</a></div>';
 
     taskbar.innerHTML =
-      '<button type="button" class="xp-start-button"><span class="xp-start-icon"></span><span>Inicio</span></button>' +
-      '<div class="xp-task-button"><span class="xp-task-icon">e</span><span data-xp-task-label></span></div>' +
-      '<div class="xp-task-spacer"></div>' +
-      '<div class="xp-tray"><span>ES</span><span class="xp-tray-light"></span></div>';
+      '<button type="button" class="web-start-button"><span class="web-start-icon"></span><span>Inicio</span></button>' +
+      '<div class="web-task-button"><span class="web-task-icon">N</span><span data-web-task-label></span></div>' +
+      '<div class="web-task-spacer"></div>' +
+      '<div class="web-tray"><span>ES</span><span class="web-tray-light"></span></div>';
 
     scripts = body.querySelectorAll("script");
     child = body.firstChild;
@@ -683,7 +683,7 @@
 
     body.insertBefore(desktop, scripts.length ? scripts[0] : null);
     body.insertBefore(taskbar, scripts.length ? scripts[0] : null);
-    body.classList.add("xp-shell-active");
+    body.classList.add("web-shell-active");
 
     updateBrowserChrome();
 

@@ -3,7 +3,7 @@
 }
 
 :root {
-  --xp-taskbar-height: 31px;
+  --web-taskbar-height: 31px;
 }
 
 html,
@@ -52,24 +52,24 @@ button:active {
   background: #ddd;
 }
 
-.xp-shell-active {
+.web-shell-active {
   height: 100vh;
   overflow: hidden;
   background: #2f68b4;
 }
 
-.xp-shell-active.is-fullscreen {
+.web-shell-active.is-fullscreen {
   width: 100vw;
   height: 100vh;
 }
 
-.xp-desktop {
-  height: calc(100vh - var(--xp-taskbar-height));
+.web-desktop {
+  height: calc(100vh - var(--web-taskbar-height));
   padding: 0;
   background: #2f68b4;
 }
 
-.ie-window {
+.browser-window {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -79,11 +79,11 @@ button:active {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .45);
 }
 
-.xp-shell-active.is-fullscreen .ie-window {
+.web-shell-active.is-fullscreen .browser-window {
   border: 0;
 }
 
-.ie-chrome {
+.browser-chrome {
   flex: 0 0 auto;
   border-bottom: 1px solid #9ca8b6;
   background: #ece9d8;
@@ -92,7 +92,7 @@ button:active {
   font-size: 11px;
 }
 
-.ie-titlebar {
+.browser-titlebar {
   display: flex;
   align-items: center;
   height: 25px;
@@ -103,8 +103,8 @@ button:active {
   text-shadow: 1px 1px 0 rgba(0, 0, 0, .35);
 }
 
-.ie-title-icon,
-.xp-task-icon {
+.browser-title-icon,
+.web-task-icon {
   display: inline-grid;
   place-items: center;
   width: 16px;
@@ -119,20 +119,20 @@ button:active {
   line-height: 1;
 }
 
-.ie-title-text {
+.browser-title-text {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.ie-window-controls {
+.browser-window-controls {
   display: flex;
   gap: 2px;
   margin-left: auto;
 }
 
-.ie-window-controls button {
+.browser-window-controls button {
   display: grid;
   place-items: center;
   width: 22px;
@@ -149,12 +149,12 @@ button:active {
   font-weight: bold;
 }
 
-.ie-window-controls button:last-child {
+.browser-window-controls button:last-child {
   background: linear-gradient(#ef9b7e, #c83d1c);
 }
 
-.ie-menubar,
-.ie-linksbar {
+.browser-menubar,
+.browser-linksbar {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -165,7 +165,7 @@ button:active {
   white-space: nowrap;
 }
 
-.ie-toolbar {
+.browser-toolbar {
   display: grid;
   grid-template-columns: auto auto auto auto auto minmax(120px, 1fr) auto;
   align-items: center;
@@ -177,7 +177,7 @@ button:active {
   background: linear-gradient(#fbfbf8, #ebe8dc);
 }
 
-.ie-round-button {
+.browser-round-button {
   display: grid;
   place-items: center;
   width: 25px;
@@ -191,12 +191,12 @@ button:active {
   font-weight: bold;
 }
 
-.ie-round-button.muted {
+.browser-round-button.muted {
   opacity: .45;
 }
 
-.ie-tool-button,
-.ie-go-button {
+.browser-tool-button,
+.browser-go-button {
   min-height: 22px;
   padding: 1px 6px;
   border-color: #b5b2a6;
@@ -204,11 +204,11 @@ button:active {
   font-size: 11px;
 }
 
-.ie-address-label {
+.browser-address-label {
   color: #555;
 }
 
-.ie-address-box {
+.browser-address-box {
   display: flex;
   align-items: center;
   min-width: 0;
@@ -217,7 +217,7 @@ button:active {
   background: #fff;
 }
 
-.ie-address-icon {
+.browser-address-icon {
   display: inline-grid;
   place-items: center;
   width: 21px;
@@ -229,7 +229,7 @@ button:active {
   font-weight: bold;
 }
 
-.ie-address-text {
+.browser-address-text {
   min-width: 0;
   overflow: hidden;
   color: #111;
@@ -237,19 +237,19 @@ button:active {
   white-space: nowrap;
 }
 
-.ie-go-button {
+.browser-go-button {
   min-width: 33px;
   color: #064b05;
   font-weight: bold;
 }
 
-.ie-linksbar {
+.browser-linksbar {
   gap: 14px;
   height: 24px;
   color: #555;
 }
 
-.ie-linksbar a {
+.browser-linksbar a {
   color: #003399;
 }
 
@@ -270,7 +270,7 @@ button:active {
   flex-direction: column;
 }
 
-.xp-taskbar {
+.web-taskbar {
   position: fixed;
   right: 0;
   bottom: 0;
@@ -278,7 +278,7 @@ button:active {
   z-index: 50;
   display: flex;
   align-items: center;
-  height: var(--xp-taskbar-height);
+  height: var(--web-taskbar-height);
   background: linear-gradient(#2b78da, #0f49a6 48%, #0d3f99 49%, #195fc0);
   color: #fff;
   font-family: Tahoma, Arial, sans-serif;
@@ -286,36 +286,31 @@ button:active {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55);
 }
 
-.xp-start-button {
+.web-start-button {
   display: flex;
   align-items: center;
-  gap: 5px;
-  width: 98px;
-  height: var(--xp-taskbar-height);
-  min-height: var(--xp-taskbar-height);
-  padding: 0 12px 0 8px;
-  border: 0;
-  border-radius: 0 14px 14px 0;
-  background: linear-gradient(#75cf55, #23920d 52%, #16720a);
-  color: #fff;
+  justify-content: center;
+  width: 82px;
+  height: var(--web-taskbar-height);
+  min-height: var(--web-taskbar-height);
+  padding: 0 12px;
+  border: 1px solid #8d6d16;
+  border-left: 0;
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(#f5d26a, #d59b25 52%, #b77a12);
+  color: #3b2a04;
   font-family: Tahoma, Arial, sans-serif;
-  font-size: 14px;
-  font-style: italic;
+  font-size: 13px;
+  font-style: normal;
   font-weight: bold;
-  text-shadow: 1px 1px 0 rgba(0, 0, 0, .35);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .42);
 }
 
-.xp-start-icon {
-  width: 20px;
-  height: 20px;
-  border-radius: 3px;
-  background-image: url("assets/xp-start-logo.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 34px 34px;
+.web-start-icon {
+  display: none;
 }
 
-.xp-task-button {
+.web-task-button {
   display: flex;
   align-items: center;
   width: min(280px, calc(100vw - 230px));
@@ -329,18 +324,18 @@ button:active {
   overflow: hidden;
 }
 
-.xp-task-button span:last-child {
+.web-task-button span:last-child {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.xp-task-spacer {
+.web-task-spacer {
   flex: 1;
 }
 
-.xp-tray {
+.web-tray {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -350,7 +345,7 @@ button:active {
   background: linear-gradient(#32a6f3, #1476cc);
 }
 
-.xp-tray-light {
+.web-tray-light {
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -473,7 +468,7 @@ button:active {
 }
 
 .logo-word-the .logo-letter {
-  color: #5a6cba;
+  color: #3555a6;
 }
 
 .logo-letter {
@@ -501,27 +496,27 @@ button:active {
 }
 
 .tone-1 {
-  color: #5a6cba;
+  color: #3555a6;
 }
 
 .tone-2 {
-  color: #448a2e;
+  color: #2f6b2f;
 }
 
 .tone-3 {
-  color: #cc9a07;
+  color: #b66318;
 }
 
 .tone-4 {
-  color: #cc3320;
+  color: #9e2d25;
 }
 
 .tone-5 {
-  color: #5a6cba;
+  color: #3555a6;
 }
 
 .tone-6 {
-  color: #cc9a07;
+  color: #b66318;
 }
 
 .home-search-row {
@@ -1317,25 +1312,25 @@ button:active {
     padding: 24px 0 28px;
   }
 
-  .ie-menubar,
-  .ie-linksbar {
+  .browser-menubar,
+  .browser-linksbar {
     gap: 10px;
     overflow: hidden;
   }
 
-  .ie-toolbar {
+  .browser-toolbar {
     grid-template-columns: auto auto auto auto;
   }
 
-  .ie-address-label {
+  .browser-address-label {
     grid-column: 1 / 2;
   }
 
-  .ie-address-box {
+  .browser-address-box {
     grid-column: 2 / -2;
   }
 
-  .ie-go-button {
+  .browser-go-button {
     grid-column: -2 / -1;
   }
 
@@ -1438,23 +1433,23 @@ button:active {
     font-size: 6.8px;
   }
 
-  .ie-tool-button {
+  .browser-tool-button {
     display: none;
   }
 
-  .ie-toolbar {
+  .browser-toolbar {
     grid-template-columns: auto auto auto minmax(0, 1fr) auto;
   }
 
-  .ie-address-label {
+  .browser-address-label {
     display: none;
   }
 
-  .ie-address-box {
+  .browser-address-box {
     grid-column: 4 / 5;
   }
 
-  .ie-go-button {
+  .browser-go-button {
     grid-column: 5 / 6;
   }
 
